@@ -11,7 +11,7 @@ export default function About() {
             setStyle({
              color: 'white',
              backgroundColor:'black',
-             border: '1px solid white' 
+             border: '1px solid white',
             }) 
          setBtnTxt('Enable Light Mode');
          }
