@@ -6,36 +6,39 @@ export default function Textform(props) {
     const handleUpclick = () =>{
         let newText = content.toUpperCase();
         setContent(newText)
-        props.AlertMessage("converted to uppercase","success");
-
+        props.AlertMessage("converted to uppercase","success"); 
     }
     const handleloclick = () =>{
-        let newText = content.toLowerCase();
-        setContent(newText)
-        props.AlertMessage("converted to lowercase","success");
-
-    }
+            let newText = content.toLowerCase();
+            setContent(newText)
+            props.AlertMessage("converted to lowercase","success");
+        }
     const handleonchange = (event) =>{
         const val = event.target.value
         setContent(val);
     }
-    const handleclearclick = () => {
-        let newText = ""
-        setContent(newText);
-        props.AlertMessage("Textbox cleared","success");
-
-    }
+    const handleclearclick = () => 
+       {
+            let newText = ""
+            setContent(newText);
+            props.AlertMessage("Textbox cleared","success");
+        }
     const handlespace = () => {
-        let newText = content.replace(/\s+/g,' ').trim();
-        setContent(newText);
-        props.AlertMessage("Spaces Removed","success");
-
-    }
+        let count = content.indexOf(' ');
+        console.log('Value of count: ', count)
+         if (count <= 0){
+                props.AlertMessage("No Extra Spaces","warning");
+            } else {
+                let newText = content.replace(/\s+/g,' ').trim();
+                setContent(newText);
+                props.AlertMessage("Spaces Removed","success")
+            }
+        }
     const handlecopy = () => {
-        let copyContent = document.getElementById("myBox").select();
-        props.AlertMessage("Text copied","success");
-        navigator.clipboard.writeText(copyContent.value);
-    }
+            let copyContent = document.getElementById("myBox").select();
+            props.AlertMessage("Text copied","success");
+            navigator.clipboard.writeText(copyContent.value);
+        }
     const [content, setContent] = useState('');
 
     let trimedvar = content.trim();
@@ -50,14 +53,14 @@ export default function Textform(props) {
             <div className='container' style={{color:props.modes === 'dark'?'white':'#042743'}}>
             <h2>{props.heading}</h2> 
                 <div className="mb-6">
-                    <textarea className="form-control" value={content} onChange={handleonchange} style={{backgroundColor: props.modes === 'dark'?'grey':'white',color:props.modes === 'dark'?'white':'#042743'}} id="myBox" rows="8" placeholder='Enter Text'></textarea>
+                    <textarea className="form-control" value={content} onChange={handleonchange} style={{backgroundColor: props.modes === 'dark'?'#13466e':'white',color:props.modes === 'dark'?'white':'#042743'}} id="myBox" rows="8" placeholder='Enter Text'></textarea>
                 </div>
                 <div className="btns">
-                    <button type="button" className="btn btn-primary mx-1" onClick={handleUpclick}>Convert To Uppercase</button>
-                    <button type="button" className="btn btn-primary mx-1"onClick={handleloclick}>Convert To Lowercase</button>
-                    <button type="button" className="btn btn-primary mx-1"onClick={handleclearclick}>Clear</button>
-                    <button type="button" className="btn btn-primary mx-1"onClick={handlecopy}>Copy Text</button>
-                    <button type="button" className="btn btn-primary mx-1"onClick={handlespace}>Remove Extra Space</button>
+                    <button disabled = {content.length === 0}type="button" className="btn btn-primary mx-1 my-1" onClick={handleUpclick}>Convert To Uppercase</button>
+                    <button disabled = {content.length === 0} type="button" className="btn btn-primary mx-1 my-1"onClick={handleloclick}>Convert To Lowercase</button>
+                    <button disabled = {content.length === 0}type="button" className="btn btn-primary mx-1 my-1"onClick={handleclearclick}>Clear</button>
+                    <button disabled = {content.length === 0} type="button" className="btn btn-primary mx-1 my-1"onClick={handlecopy}>Copy Text</button>
+                    <button disabled = {content.length === 0} type="button" className="btn btn-primary mx-1 my-1"onClick={handlespace}>Remove Extra Space</button>
 
                 </div>
             </div>
