@@ -39,3 +39,6 @@
 .blank{
   color: blueviolet;
 }
+.accordion-button::after {
+  filter: invert(1);
+}

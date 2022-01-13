@@ -42,9 +42,10 @@ export default function Textform(props) {
     const [content, setContent] = useState('');
 
     let trimedvar = content.trim();
-    var NumberOfWords = content.length>0 ? trimedvar.split(" ").length : 0;
+    let newT = trimedvar.split(/\s/);
+    var NumberOfWords = content.length>0 ? newT.length : 0;
     if(trimedvar.trim() ===""){
-        NumberOfWords = 0;
+       NumberOfWords = 0;
     }
 
     var vowels = content.length>0 ? (content.match(/[aeiou]/gi) ? content.match(/[aeiou]/gi).length : 0) : 0
